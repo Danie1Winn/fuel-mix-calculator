@@ -1,0 +1,139 @@
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('./assets/fonts/CoolveticaRg-Regular.woff2') format('woff2'),
+    url('./assets/fonts/CoolveticaRg-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #1d2021;
+  font-family: 'Coolvetica';
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: #ebdbb2;
+}
+
+.form-group {
+  margin-bottom: 15px;
+
+  label {
+    display: block;
+    color: #ebdbb2;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ebdbb2;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #1d2021;
+    color: white;
+  }
+
+  input[type="number"]::placeholder {
+    color: #ebdbb2;
+  }
+
+  input[type="radio"] {
+    margin-right: 10px;
+  }
+
+  label[for="unit-toggle"] {
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
+
+.toggle-fuel-remaining {
+  @extend .button-group;
+}
+
+.button-group, .toggle-fuel-remaining {
+  display: inline-flex;
+  border: 1px solid #ebdbb2;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.button-group button, .toggle-fuel-remaining button {
+  background-color: #282828;
+  font-family: 'Coolvetica';
+  color: #ebdbb2;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-group button:hover, .toggle-fuel-remaining button:hover {
+  background-color: #3d3d3d;
+}
+
+.button-group button.active, .toggle-fuel-remaining button.active {
+  background-color: #ebdbb2;
+  color: white;
+}
+
+.button-group button:not(.active), .toggle-fuel-remaining button:not(.active) {
+  color: #ebdbb2;
+}
+
+.distance-mpg-inputs {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.distance-mpg-inputs input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ebdbb2;
+  border-radius: 5px;
+  background-color: #1d2021;
+  color: white;
+}
+
+.distance-mpg-inputs input::placeholder {
+  color: #ebdbb2;
+}
+
+.fuel-remaining-output {
+  display: block;
+  color: #ebdbb2;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  text-align: center;
+  color: #ebdbb2;
+}
