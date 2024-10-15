@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fuel-mix-calculator/static/css/main.11ad5d5e.css",
+    "main.js": "/fuel-mix-calculator/static/js/main.18d4cfa0.js",
+    "static/media/CoolveticaRg-Regular.woff": "/fuel-mix-calculator/static/media/CoolveticaRg-Regular.8307bfa187bccdc55f4d.woff",
+    "static/media/CoolveticaRg-Regular.woff2": "/fuel-mix-calculator/static/media/CoolveticaRg-Regular.7d1f3b1dd46ad6557a17.woff2",
+    "index.html": "/fuel-mix-calculator/index.html",
+    "main.11ad5d5e.css.map": "/fuel-mix-calculator/static/css/main.11ad5d5e.css.map",
+    "main.18d4cfa0.js.map": "/fuel-mix-calculator/static/js/main.18d4cfa0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.11ad5d5e.css",
+    "static/js/main.18d4cfa0.js"
+  ]
+}
