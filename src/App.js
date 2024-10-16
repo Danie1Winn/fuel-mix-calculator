@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 
 function App() {
-  const [tankSize, setTankSize] = useState('');
+  const [tankSize, setTankSize] = useState(''); // Fuel tank size
   const [fuelRemaining, setFuelRemaining] = useState('');
+  const [fuelPercentage, setFuelPercentage] = useState(''); // New state for percentage input
   const [ethanolInTank, setEthanolInTank] = useState('');
-  const [ethanolPumpGas, setEthanolPumpGas] = useState('');
-  const [ethanolE85, setEthanolE85] = useState('');
-  const [targetEthanol, setTargetEthanol] = useState('');
+  const [ethanolPumpGas, setEthanolPumpGas] = useState(10); // Pre-filled with 10
+  const [ethanolE85, setEthanolE85] = useState(85); // Pre-filled with 85
+  const [targetEthanol, setTargetEthanol] = useState(30); // Pre-filled with 30
   const [result, setResult] = useState(null);
   const [unit, setUnit] = useState('gallons');
   const [useDistanceToEmpty, setUseDistanceToEmpty] = useState(false);
+  const [usePercentage, setUsePercentage] = useState(false); // New state for percentage selection
   const [distanceToEmpty, setDistanceToEmpty] = useState('');
   const [mpg, setMpg] = useState('');
 
@@ -31,8 +33,11 @@ function App() {
     if (useDistanceToEmpty && distanceToEmpty && mpg) {
       const calculatedFuelRemaining = (parseFloat(distanceToEmpty) / parseFloat(mpg)).toFixed(2);
       setFuelRemaining(calculatedFuelRemaining);
+    } else if (usePercentage && fuelPercentage && tankSize) {
+      const calculatedFuelRemaining = (parseFloat(fuelPercentage) / 100 * parseFloat(tankSize)).toFixed(2);
+      setFuelRemaining(calculatedFuelRemaining);
     }
-  }, [distanceToEmpty, mpg, useDistanceToEmpty]);
+  }, [distanceToEmpty, mpg, useDistanceToEmpty, fuelPercentage, usePercentage, tankSize]);
 
   const calculateMix = () => {
     let convertedTankSize = parseFloat(tankSize);
@@ -104,29 +109,57 @@ function App() {
       </div>
 
       <div className="form-group">
-        <label>Fuel Remaining ({unit}):</label>
+        <label>
+          {usePercentage ? 'Fuel Remaining (%)' : useDistanceToEmpty ? 'Fuel Remaining:' : `Fuel Remaining (${unit}):`}
+        </label>
         <div className="toggle-fuel-remaining">
           <button
             type="button"
-            className={!useDistanceToEmpty ? 'active' : ''}
-            onClick={() => setUseDistanceToEmpty(false)}
+            className={!useDistanceToEmpty && !usePercentage ? 'active' : ''}
+            onClick={() => {
+              setUseDistanceToEmpty(false);
+              setUsePercentage(false);
+            }}
           >
-            Manual entry
+            By {unit}
+          </button>
+          <button
+            type="button"
+            className={usePercentage ? 'active' : ''}
+            onClick={() => {
+              setUseDistanceToEmpty(false);
+              setUsePercentage(true);
+            }}
+          >
+            By percentage
           </button>
           <button
             type="button"
             className={useDistanceToEmpty ? 'active' : ''}
-            onClick={() => setUseDistanceToEmpty(true)}
+            onClick={() => {
+              setUseDistanceToEmpty(true);
+              setUsePercentage(false);
+            }}
           >
             Calculate for me
           </button>
         </div>
-        {!useDistanceToEmpty ? (
+
+        {!useDistanceToEmpty && !usePercentage ? (
           <input
             type="number"
             name="fuelRemaining"
             value={fuelRemaining}
             onChange={(e) => setFuelRemaining(e.target.value)}
+            step="0.01"
+            required
+          />
+        ) : usePercentage ? (
+          <input
+            type="number"
+            name="fuelPercentage"
+            value={fuelPercentage}
+            onChange={(e) => setFuelPercentage(e.target.value)}
             step="0.01"
             required
           />
@@ -156,7 +189,7 @@ function App() {
       </div>
 
       <div className="form-group">
-        <label>Ethanol % of Current Tank:</label>
+        <label>Ethanol Content of Current Tank:</label>
         <input
           type="number"
           name="ethanolInTank"
@@ -168,7 +201,7 @@ function App() {
       </div>
 
       <div className="form-group">
-        <label>Ethanol % of Pump Gas:</label>
+        <label>Ethanol Content of Pump Gas:</label>
         <input
           type="number"
           name="ethanolPumpGas"
@@ -180,7 +213,7 @@ function App() {
       </div>
 
       <div className="form-group">
-        <label>Ethanol % of E85:</label>
+        <label>Ethanol Content of E85:</label>
         <input
           type="number"
           name="ethanolE85"
@@ -192,7 +225,7 @@ function App() {
       </div>
 
       <div className="form-group">
-        <label>Desired Ethanol %:</label>
+        <label>Desired Ethanol Content:</label>
         <input
           type="number"
           name="targetEthanol"
