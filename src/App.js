@@ -2,17 +2,17 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 
 function App() {
-  const [tankSize, setTankSize] = useState(''); // Fuel tank size
+  const [tankSize, setTankSize] = useState('');
   const [fuelRemaining, setFuelRemaining] = useState('');
-  const [fuelPercentage, setFuelPercentage] = useState(''); // New state for percentage input
+  const [fuelPercentage, setFuelPercentage] = useState(''); 
   const [ethanolInTank, setEthanolInTank] = useState('');
-  const [ethanolPumpGas, setEthanolPumpGas] = useState(10); // Pre-filled with 10
-  const [ethanolE85, setEthanolE85] = useState(85); // Pre-filled with 85
-  const [targetEthanol, setTargetEthanol] = useState(30); // Pre-filled with 30
+  const [ethanolPumpGas, setEthanolPumpGas] = useState(10);
+  const [ethanolE85, setEthanolE85] = useState(85);
+  const [targetEthanol, setTargetEthanol] = useState(30);
   const [result, setResult] = useState(null);
   const [unit, setUnit] = useState('gallons');
   const [useDistanceToEmpty, setUseDistanceToEmpty] = useState(false);
-  const [usePercentage, setUsePercentage] = useState(false); // New state for percentage selection
+  const [usePercentage, setUsePercentage] = useState(false); 
   const [distanceToEmpty, setDistanceToEmpty] = useState('');
   const [mpg, setMpg] = useState('');
 
